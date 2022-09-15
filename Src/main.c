@@ -35,16 +35,15 @@ int main(void)
 	uint32_t *pGpiodModeReg 		= (uint32_t*)0x40020C00;
 	uint32_t *pGpiodOutputDataReg 	= (uint32_t*)0x40020C14;
 
-	// 1. enable the clock for GPIOD peripheral in the AHB1ENR
-	*pClkCtrlReg |= 0x08;
-
-	*pGpiodModeReg &= 0xFFFFF3FF;
-	*pGpiodModeReg |= 0x00000400;
-	*pGpiodOutputDataReg |= 0x0020;
-
+	// enable the clock for GPIOD peripheral in the AHB1ENR
+	*pClkCtrlReg 		 |= 	0x08;
+	// create mask and set bits accordingly
+	*pGpiodModeReg 		 &= 	0xFFFFF3FF;
+	*pGpiodModeReg 		 |= 	0x00000400;
+	*pGpiodOutputDataReg |= 	0x0020;
 	// clear the bits
-	*pGpiodModeReg 			&= 0xFFFFFFFF;
-	*pGpiodOutputDataReg 	&= 0x0000;
+	*pGpiodModeReg 		 &= 	0xFFFFFFFF;
+	*pGpiodOutputDataReg &= 	0x0000;
 
     /* Loop forever */
 	for(;;);
